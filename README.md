@@ -1,7 +1,6 @@
-### Viés Sistêmico em Vistos de Trabalho no Brasil: uma Análise com Regressão Logística e Estatística Inferencial
+# Viés Sistêmico em Vistos de Trabalho no Brasil: uma Análise com Regressão Logística e Estatística Inferencial
 
 ## Etapa 1 - Problema de Pesquisa, Mapeamento e Hipóteses
-Pergunta de Pesquisa e Escopo
 
   Este é um projeto educativo em fase de desenvolvimento acerca de vieses sistêmicos na concessão de vistos de trabalho no Brasil e visa utilizar os conhecimentos e dados obtidos no curso Introdução ao R para Análise de Dados de Imigração — SEMUNI 2026 para produzir um painel interativo focado em buscar evidências quantitativas de discriminação racial ou geográfica no deferimento de vistos de trabalho através do uso de estatística inferencial
 
@@ -35,19 +34,31 @@ A hipótese alternativa ($H_1$) é que isso ocorra por conta de um víes sistêm
 
 AIC / BIC (para comparação de modelos)
 
-Pseudo-$R^2$ (McFadden)
+Pseudo-R² (McFadden) 
 
 Matriz de Resíduos / Teste de Hosmer-Lemeshow (ajuste do modelo)
 
 ## Etapa 2 - Coleta e ETL:
 
+> Em desenvolvimento
+
 ## Etapa 3 - Análise Exploratória de Dados:
+
+> Em desenvolvimento
 
 ## Etapa 4 - Modelagem Estatística:
 
+> Em desenvolvimento
+
 ## Etapa 5 - Avaliação e Validação:
+
+> Em desenvolvimento
 
 ## Etapa 6 - Divulgação dos dados:
 
+> Em desenvolvimento
 
+## Autor
+
+pazoliveira
 
