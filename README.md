@@ -1,64 +1,89 @@
 # Viés Sistêmico em Vistos de Trabalho no Brasil: uma Análise com Regressão Logística e Estatística Inferencial
 
-## Etapa 1 - Problema de Pesquisa, Mapeamento e Hipóteses
+> Análise estatística (R/Shiny) de viés sistêmico em vistos de trabalho no Brasil, usando regressão logística sobre dados públicos de imigração.
 
-   Este é um projeto educativo em fase de desenvolvimento acerca de vieses sistêmicos na concessão de vistos de trabalho no Brasil e visa produzir um painel interativo focado em buscar evidências quantitativas de discriminação sistêmica contra grupos raciais ou geopolíticos no deferimento de vistos de trabalho através do uso de estatística inferencial
+## Etapa 1 - Problema central, mapeamento e hipóteses
 
-  Serão analisados exclusivamente os resultado definitivos "Deferido" e "indeferido" - Outros status intermediários ou administrativos como "Em exigência", "cancelado" serão desconsiderados para os propósitos desta pesquisa. 
+### Problema de pesquisa
 
-### Tradução Operacional(Mapeamento das váriaveis)
-  A probabilidade de deferimento será calculada usando a função da regressão logística. Nossa variável dependente Y assumirá um valor estrito onde: 0 é indeferido e 1 é deferido.
+Este é um trabalho acadêmico que busca evidências de viés sistêmico contra continentes, países ou sub-regiões, através de análise inferencial com regressão logística, sobre dados públicos de concessão de vistos de trabalho no Brasil, de 2024 a setembro de 2025.
 
-  Nossas variáveis de interesse ($X_1$ , $X_2$ , $X_3$ ) são o fator bloco geopolítico, continente e matriz demográfica predominante de origem da pessoa aplicante e nossa categoria de referência será o continente europeu / Norte Global / Matriz demográfica predominante branca, por representar um grupo privilegiado no contexto migratório.(Para evitar problemas de multicolinearidade, as variáveis serão testadas separadamente)
+**Pergunta:** Controlando por Escolaridade, Norma Jurídica, Idade e Sexo, a chance de deferimento varia conforme o país, o continente ou a sub-região de origem?
 
-  Variáveis de controle: escolaridade do solicitante($X_4$), IDH ou Renda per capita do país de origem(váriavel correlacionada, portanto apenas uma das duas)($X_5$), IDH-M ou Renda per capita do Estado de origem do local de destino($X_6$), Norma jurídica($X_7$)
+### Mapeamento das variáveis
 
-* $X_4$ - Está controlando a influência do fator educacional (capital humano) - 5 
-* $X_5$ - Está controlando a influência do fator econômico ou social do aplicante (Vulnerabilidade social/econômica de origem)
-* $X_6$ - Está controlando a influência do fator econômico ou social do Estado de Destino (demanda do mercado local)
-* $X_7$ - Está controlando a influência do fator legal/burocrático (Normas jurídicas / Amparo legal do visto)
+Para efeitos deste trabalho, serão excluídos os status intermediários ou burocráticos, focando apenas no deferimento ou não das solicitações.
 
-### Formalização de hipóteses
+#### Variável dependente
 
-A hipótese Nula ($H_0$) é que qualquer tipo de desvio ocorra por pura coincidência ou por variância natural dos dados escolhidos.
+Y é o resultado da solicitação: 1 = Deferimento; 0 = Indeferimento.
 
-A hipótese alternativa ($H_1$) é que isso ocorra por conta de um víes sistêmico contra determinadas matrizes populacionais ou/e blocos geopolíticos. A hipótese $H_0$ só será rejeitada caso o p-valor associado as variáveis de interesse seja menor que 0,05 e o Odds Ratio (OR) gerados sejam significativamente diferentes de 1.
+#### Variável de interesse
 
-### Governança 
+$X_1$ é a origem do aplicante, em três níveis de granularidade, cada um em um modelo separado:
 
-  Os dados pessoais dos aplicantes já estão anônimos em conformidade com a LGPD e a LAI.
+1. Continente
+2. Sub-região (M49 – ONU)
+3. País
 
-  Este é um trabalho acadêmico, independente e autoral, sem vínculo formal com o OBMigra ou do orgão que publicizou a fonte dos dados.
+*Categoria de referência:* Europa (a definir para sub-região e país).
 
-### Métricas de validação
+#### Variáveis de controle
 
-AIC / BIC (para comparação de modelos)
+$X_2$ - Escolaridade
+$X_3$ - Norma Jurídica
+$X_6$ - Idade
+$X_7$ - Sexo
 
-Pseudo-R² (McFadden) 
+*Opcionais (sensibilidade / Modelo C):*
+$X_4$ - IDH da origem
+$X_5$ - IDH-M do destino
 
-Matriz de Resíduos / Teste de Hosmer-Lemeshow (ajuste do modelo)
+### Modelos
+
+- **Modelo A:** Y ~ $X_1$
+- **Modelo B:** Y ~ $X_1$ + $X_2$ + $X_3$ + $X_6$ + $X_7$
+
+### Hipótese
+
+$H_0$: Após os controles, a chance de deferimento não muda por conta da origem (OR = 1); desvios são variância natural dos dados.
+
+$H_1$: Se houver divergência significativa na chance de deferimento devido à origem, isso indica disparidade não explicada pelas variáveis observadas.
+
+**Regra de decisão (fixada antes de rodar os modelos):** rejeitar $H_0$ se o IC 95% do OR de uma origem excluir 1, com correção de Holm para comparações múltiplas. Erros-padrão agrupados por país nos níveis continente e sub-região.
+
+### Limitações
+
+Disparidade não prova intenção. Variáveis não observadas (documentação, empregador, ocupação) podem explicar parte do resultado. A exclusão de "Em exigência" e "Cancelado" pode introduzir viés de seleção. A inclusão de renovações também pode introduzir viés de seleção, pois exige aprovação anterior; a análise principal considera pedidos iniciais, se a base permitir separá-los.
+
+### Governança
+
+Os dados pessoais dos aplicantes já estão anônimos em conformidade com a LGPD e a LAI.
+
+Este é um trabalho acadêmico, independente e autoral, sem vínculo formal com o OBMigra ou com o órgão que publicizou a fonte dos dados.
 
 ## Etapa 2 - Compreensão dos Dados e Análise Exploratória (EDA)
+> Em desenvolvimento
+
+## Etapa 3 - Preparação dos Dados e Engenharia de Recursos
+> Em desenvolvimento
+
+## Etapa 4 - Modelagem Estatística
+> Em desenvolvimento
+
+## Etapa 5 - Avaliação e Validação
+
+Métricas de validação:
+
+- AIC / BIC (para comparação de modelos)
+- Pseudo-R² (McFadden)
+- Matriz de Resíduos / Teste de Hosmer-Lemeshow (ajuste do modelo), acompanhado de gráfico de calibração e AUC, pois o teste tende a rejeitar o ajuste em amostras grandes
 
 > Em desenvolvimento
 
-## ## Etapa 3: Preparação dos Dados e Engenharia de Recursos
-
-> Em desenvolvimento
-
-## Etapa 4 - Modelagem Estatística:
-
-> Em desenvolvimento
-
-## Etapa 5 - Avaliação e Validação:
-
-> Em desenvolvimento
-
-## Etapa 6 - Comunicação dos Resultados e Conclusões:
-
+## Etapa 6 - Comunicação dos Resultados e Conclusões
 > Em desenvolvimento
 
 ## Autor
 
 pazoliveira
-
